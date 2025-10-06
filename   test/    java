@@ -1,0 +1,16 @@
+public class AtencionMedicaControllerTest {
+    
+    @Test
+    public void cuandoActualizarAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() {
+        // Configuración de datos de prueba
+        // Lógica para llamar al controlador y verificar la respuesta
+        // Asegúrate de que el estado HTTP sea 200
+    }
+
+    @Test
+    public void cuandoCrearAtencionSinPacienteId_entoncesRetornarBadRequestConEnlaces() {
+        // Configuración de datos de prueba
+        // Lógica para llamar al controlador y verificar la respuesta
+        // Asegúrate de que el estado HTTP sea 400 y que el JSON contenga el error esperado
+    }
+}
