@@ -28,7 +28,7 @@ public class AtencionMedicaController {
     @Autowired
     private AtencionMedicaService atencionMedicaService;
 
-    // GET - Obtener todas las atenciones médicas con HATEOAS
+    // GET - Obtener todas las atenciones médicas 
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<AtencionMedica>>> getAllAtenciones() {
         try {
@@ -37,10 +37,9 @@ public class AtencionMedicaController {
             List<EntityModel<AtencionMedica>> atencionesConLinks = atenciones.stream()
                     .map(atencion -> {
                         EntityModel<AtencionMedica> resource = EntityModel.of(atencion);
-                        // Self link
+
                         resource.add(linkTo(methodOn(AtencionMedicaController.class)
                                 .getAtencionById(atencion.getId())).withSelfRel());
-                        // Related links
                         resource.add(linkTo(methodOn(AtencionMedicaController.class)
                                 .getAtencionesByPacienteId(atencion.getPacienteId())).withRel("atenciones-paciente"));
                         resource.add(linkTo(methodOn(AtencionMedicaController.class)
@@ -52,7 +51,7 @@ public class AtencionMedicaController {
                     .collect(Collectors.toList());
 
             CollectionModel<EntityModel<AtencionMedica>> collection = CollectionModel.of(atencionesConLinks);
-            // Collection links
+
             collection.add(linkTo(methodOn(AtencionMedicaController.class).getAllAtenciones()).withSelfRel());
             collection.add(
                     linkTo(methodOn(AtencionMedicaController.class).createAtencion(null)).withRel("crear-atencion"));
@@ -66,7 +65,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // GET - Obtener atención por ID con HATEOAS
+    // GET - Obtener atención por ID 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAtencionById(@PathVariable Long id) {
         try {
@@ -75,10 +74,10 @@ public class AtencionMedicaController {
             if (atencion.isPresent()) {
                 EntityModel<AtencionMedica> resource = EntityModel.of(atencion.get());
 
-                // Self link
+                
                 resource.add(linkTo(methodOn(AtencionMedicaController.class).getAtencionById(id)).withSelfRel());
 
-                // Navigation links
+                
                 resource.add(linkTo(methodOn(AtencionMedicaController.class).getAllAtenciones())
                         .withRel("todas-atenciones"));
                 resource.add(linkTo(methodOn(AtencionMedicaController.class).updateAtencion(id, null))
@@ -100,7 +99,8 @@ public class AtencionMedicaController {
             } else {
                 Map<String, String> response = new HashMap<>();
                 response.put("mensaje", "No se encontró la atención médica con ID: " + id);
-                // Agregar enlaces incluso en caso de error
+                
+                
                 EntityModel<Map<String, String>> errorResource = EntityModel.of(response);
                 errorResource.add(linkTo(methodOn(AtencionMedicaController.class).getAllAtenciones())
                         .withRel("todas-atenciones"));
@@ -118,7 +118,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // POST - Crear nueva atención médica con HATEOAS
+    // POST - Crear nueva atención médica 
     @PostMapping
     public ResponseEntity<?> createAtencion(@Valid @RequestBody AtencionMedica atencionMedica) {
         try {
@@ -165,7 +165,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // PUT - Actualizar atención médica existente con HATEOAS
+    // PUT - Actualizar atención médica existente 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateAtencion(@PathVariable Long id,
             @Valid @RequestBody AtencionMedica atencionDetails) {
@@ -206,7 +206,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // DELETE - Eliminar atención médica con HATEOAS
+    // DELETE - Eliminar atención médica 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAtencion(@PathVariable Long id) {
         try {
@@ -243,7 +243,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // GET - Obtener atenciones por paciente con HATEOAS
+    // GET - Obtener atenciones por paciente 
     @GetMapping("/paciente/{pacienteId}")
     public ResponseEntity<?> getAtencionesByPacienteId(@PathVariable Long pacienteId) {
         try {
@@ -278,7 +278,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // GET - Obtener atenciones por médico con HATEOAS
+    // GET - Obtener atenciones por médico 
     @GetMapping("/medico/{medicoId}")
     public ResponseEntity<?> getAtencionesByMedicoId(@PathVariable Long medicoId) {
         try {
@@ -313,7 +313,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // GET - Obtener atenciones por estado con HATEOAS
+    // GET - Obtener atenciones por estado 
     @GetMapping("/estado/{estado}")
     public ResponseEntity<?> getAtencionesByEstado(@PathVariable String estado) {
         try {
@@ -357,7 +357,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // GET - Estadísticas de atenciones con HATEOAS
+    // GET - Estadísticas de atenciones 
     @GetMapping("/estadisticas")
     public ResponseEntity<?> getEstadisticas() {
         try {
@@ -401,7 +401,7 @@ public class AtencionMedicaController {
         }
     }
 
-    // POST - Cargar datos de ejemplo con HATEOAS
+    // POST - Cargar datos de ejemplo 
     @PostMapping("/cargar-ejemplos")
     public ResponseEntity<?> cargarDatosEjemplo() {
         try {

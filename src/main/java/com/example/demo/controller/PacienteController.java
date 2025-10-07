@@ -26,7 +26,7 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
     
-    // GET - Obtener todos los pacientes con HATEOAS
+    // GET - Obtener todos los pacientes 
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Paciente>>> getAllPacientes() {
         try {
@@ -35,10 +35,10 @@ public class PacienteController {
             List<EntityModel<Paciente>> pacientesConLinks = pacientes.stream()
                 .map(paciente -> {
                     EntityModel<Paciente> resource = EntityModel.of(paciente);
-                    // Self link
+                    
                     resource.add(linkTo(methodOn(PacienteController.class)
                         .getPacienteById(paciente.getId())).withSelfRel());
-                    // Related links
+                    
                     resource.add(linkTo(methodOn(PacienteController.class)
                         .getPacienteByRut(paciente.getRut())).withRel("paciente-rut"));
                     return resource;
@@ -57,7 +57,7 @@ public class PacienteController {
         }
     }
     
-    // GET - Obtener paciente por ID con HATEOAS
+    // GET - Obtener paciente por ID 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPacienteById(@PathVariable Long id) {
         try {
@@ -66,10 +66,8 @@ public class PacienteController {
             if (paciente.isPresent()) {
                 EntityModel<Paciente> resource = EntityModel.of(paciente.get());
                 
-                // Self link
                 resource.add(linkTo(methodOn(PacienteController.class).getPacienteById(id)).withSelfRel());
                 
-                // Navigation links
                 resource.add(linkTo(methodOn(PacienteController.class).getAllPacientes()).withRel("todos-pacientes"));
                 resource.add(linkTo(methodOn(PacienteController.class).updatePaciente(id, null)).withRel("actualizar-paciente"));
                 resource.add(linkTo(methodOn(PacienteController.class).deletePaciente(id)).withRel("eliminar-paciente"));
@@ -93,7 +91,7 @@ public class PacienteController {
         }
     }
     
-    // POST - Crear nuevo paciente con HATEOAS
+    // POST - Crear nuevo paciente 
     @PostMapping
     public ResponseEntity<?> createPaciente(@Valid @RequestBody Paciente paciente) {
         try {
@@ -122,7 +120,7 @@ public class PacienteController {
         }
     }
     
-    // PUT - Actualizar paciente existente con HATEOAS
+    // PUT - Actualizar paciente existente 
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePaciente(@PathVariable Long id, 
                                            @Valid @RequestBody Paciente pacienteDetails) {
@@ -154,7 +152,7 @@ public class PacienteController {
         }
     }
     
-    // DELETE - Eliminar paciente con HATEOAS
+    // DELETE - Eliminar paciente 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePaciente(@PathVariable Long id) {
         try {
@@ -184,7 +182,7 @@ public class PacienteController {
         }
     }
     
-    // GET - Buscar paciente por RUT con HATEOAS
+    // GET - Buscar paciente por RUT 
     @GetMapping("/rut/{rut}")
     public ResponseEntity<?> getPacienteByRut(@PathVariable String rut) {
         try {
@@ -215,7 +213,7 @@ public class PacienteController {
         }
     }
     
-    // POST - Cargar pacientes de ejemplo con HATEOAS
+    // POST - Cargar pacientes de ejemplo 
     @PostMapping("/cargar-ejemplos")
     public ResponseEntity<?> cargarPacientesEjemplo() {
         try {

@@ -26,7 +26,7 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
     
-    // GET - Obtener todos los médicos con HATEOAS
+    // GET - Obtener todos los médicos 
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Medico>>> getAllMedicos() {
         try {
@@ -35,10 +35,10 @@ public class MedicoController {
             List<EntityModel<Medico>> medicosConLinks = medicos.stream()
                 .map(medico -> {
                     EntityModel<Medico> resource = EntityModel.of(medico);
-                    // Self link
+
                     resource.add(linkTo(methodOn(MedicoController.class)
                         .getMedicoById(medico.getId())).withSelfRel());
-                    // Related links
+
                     resource.add(linkTo(methodOn(MedicoController.class)
                         .getMedicoByRut(medico.getRut())).withRel("medico-rut"));
                     return resource;
@@ -46,7 +46,7 @@ public class MedicoController {
                 .collect(Collectors.toList());
             
             CollectionModel<EntityModel<Medico>> collection = CollectionModel.of(medicosConLinks);
-            // Collection links
+
             collection.add(linkTo(methodOn(MedicoController.class).getAllMedicos()).withSelfRel());
             collection.add(linkTo(methodOn(MedicoController.class).createMedico(null)).withRel("crear-medico"));
             collection.add(linkTo(methodOn(MedicoController.class).cargarMedicosEjemplo()).withRel("cargar-ejemplos"));
@@ -57,7 +57,7 @@ public class MedicoController {
         }
     }
     
-    // GET - Obtener médico por ID con HATEOAS
+    // GET - Obtener médico por ID 
     @GetMapping("/{id}")
     public ResponseEntity<?> getMedicoById(@PathVariable Long id) {
         try {
@@ -66,10 +66,8 @@ public class MedicoController {
             if (medico.isPresent()) {
                 EntityModel<Medico> resource = EntityModel.of(medico.get());
                 
-                // Self link
                 resource.add(linkTo(methodOn(MedicoController.class).getMedicoById(id)).withSelfRel());
                 
-                // Navigation links
                 resource.add(linkTo(methodOn(MedicoController.class).getAllMedicos()).withRel("todos-medicos"));
                 resource.add(linkTo(methodOn(MedicoController.class).updateMedico(id, null)).withRel("actualizar-medico"));
                 resource.add(linkTo(methodOn(MedicoController.class).deleteMedico(id)).withRel("eliminar-medico"));
@@ -93,13 +91,12 @@ public class MedicoController {
         }
     }
     
-    // POST - Crear nuevo médico con HATEOAS
+    // POST - Crear nuevo médico 
     @PostMapping
     public ResponseEntity<?> createMedico(@Valid @RequestBody Medico medico) {
         try {
             Medico nuevoMedico = medicoService.createMedico(medico);
             
-            // Crear recurso con enlaces HATEOAS
             EntityModel<Medico> resource = EntityModel.of(nuevoMedico);
             resource.add(linkTo(methodOn(MedicoController.class).getMedicoById(nuevoMedico.getId())).withSelfRel());
             resource.add(linkTo(methodOn(MedicoController.class).getAllMedicos()).withRel("todos-medicos"));
@@ -122,7 +119,7 @@ public class MedicoController {
         }
     }
     
-    // PUT - Actualizar médico existente con HATEOAS
+    // PUT - Actualizar médico existente 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateMedico(@PathVariable Long id, 
                                          @Valid @RequestBody Medico medicoDetails) {
@@ -154,7 +151,7 @@ public class MedicoController {
         }
     }
     
-    // DELETE - Eliminar médico con HATEOAS
+    // DELETE - Eliminar médico 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMedico(@PathVariable Long id) {
         try {
@@ -184,7 +181,7 @@ public class MedicoController {
         }
     }
     
-    // GET - Buscar médico por RUT con HATEOAS
+    // GET - Buscar médico por RUT 
     @GetMapping("/rut/{rut}")
     public ResponseEntity<?> getMedicoByRut(@PathVariable String rut) {
         try {
@@ -215,7 +212,7 @@ public class MedicoController {
         }
     }
     
-    // POST - Cargar médicos de ejemplo con HATEOAS
+    // POST - Cargar médicos de ejemplo 
     @PostMapping("/cargar-ejemplos")
     public ResponseEntity<?> cargarMedicosEjemplo() {
         try {

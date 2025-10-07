@@ -53,11 +53,11 @@ public class MedicoControllerTest {
 
     @Test
     void getTodosLosMedicos_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
-        // Given
+        
         List<Medico> medicos = Arrays.asList(medico);
         when(medicoService.getAllMedicos()).thenReturn(medicos);
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -72,10 +72,10 @@ public class MedicoControllerTest {
 
     @Test
     void getMedicoPorIdExistente_entoncesRetornarMedicoConEnlacesHATEOAS() throws Exception {
-        // Given
+        
         when(medicoService.getMedicoById(1L)).thenReturn(Optional.of(medico));
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -92,10 +92,10 @@ public class MedicoControllerTest {
 
     @Test
     void getMedicoPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.getMedicoById(999L)).thenReturn(Optional.empty());
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos/999")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -108,10 +108,10 @@ public class MedicoControllerTest {
 
     @Test
     void createMedicoValido_entoncesRetornarMedicoCreadoConEnlacesHATEOAS() throws Exception {
-        // Given
+        
         when(medicoService.createMedico(any(Medico.class))).thenReturn(medico);
 
-        // When & Then
+        
         mockMvc.perform(post("/medicos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(medico)))
@@ -127,11 +127,11 @@ public class MedicoControllerTest {
 
     @Test
     void createMedicoConRutDuplicado_entoncesRetornarBadRequestConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.createMedico(any(Medico.class)))
             .thenThrow(new RuntimeException("Ya existe un médico con el RUT: 12345678-9"));
 
-        // When & Then
+        
         mockMvc.perform(post("/medicos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(medico)))
@@ -144,7 +144,7 @@ public class MedicoControllerTest {
 
     @Test
     void updateMedicoExistente_entoncesRetornarMedicoActualizadoConEnlaces() throws Exception {
-        // Given
+        
         Medico medicoActualizado = new Medico();
         medicoActualizado.setId(1L);
         medicoActualizado.setNombre("Dr. Carlos Martínez Actualizado");
@@ -153,7 +153,7 @@ public class MedicoControllerTest {
 
         when(medicoService.updateMedico(eq(1L), any(Medico.class))).thenReturn(medicoActualizado);
 
-        // When & Then
+        
         mockMvc.perform(put("/medicos/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(medicoActualizado)))
@@ -169,10 +169,10 @@ public class MedicoControllerTest {
 
     @Test
     void updateMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.updateMedico(eq(999L), any(Medico.class))).thenReturn(null);
 
-        // When & Then
+        
         mockMvc.perform(put("/medicos/999")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(medico)))
@@ -186,10 +186,10 @@ public class MedicoControllerTest {
 
     @Test
     void deleteMedicoExistente_entoncesRetornarOkConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.deleteMedico(1L)).thenReturn(true);
 
-        // When & Then
+        
         mockMvc.perform(delete("/medicos/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -202,10 +202,10 @@ public class MedicoControllerTest {
 
     @Test
     void deleteMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.deleteMedico(999L)).thenReturn(false);
 
-        // When & Then
+        
         mockMvc.perform(delete("/medicos/999")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -218,10 +218,10 @@ public class MedicoControllerTest {
 
     @Test
     void getMedicoPorRutExistente_entoncesRetornarMedicoConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.getMedicoByRut("12345678-9")).thenReturn(Optional.of(medico));
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos/rut/12345678-9")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -236,10 +236,10 @@ public class MedicoControllerTest {
 
     @Test
     void getMedicoPorRutNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.getMedicoByRut("00000000-0")).thenReturn(Optional.empty());
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos/rut/00000000-0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -252,10 +252,10 @@ public class MedicoControllerTest {
 
     @Test
     void cargarMedicosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.createMedico(any(Medico.class))).thenReturn(medico);
 
-        // When & Then
+        
         mockMvc.perform(post("/medicos/cargar-ejemplos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -270,10 +270,10 @@ public class MedicoControllerTest {
 
     @Test
     void getMedicosVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
-        // Given
+        
         when(medicoService.getAllMedicos()).thenReturn(Collections.emptyList());
 
-        // When & Then
+        
         mockMvc.perform(get("/medicos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -286,12 +286,12 @@ public class MedicoControllerTest {
 
     @Test
     void createMedicoConDatosInvalidos_entoncesRetornarBadRequest() throws Exception {
-        // Given
+        
         Medico medicoInvalido = new Medico();
         medicoInvalido.setRut(""); // RUT vacío - inválido
         medicoInvalido.setNombre(""); // Nombre vacío - inválido
 
-        // When & Then
+        
         mockMvc.perform(post("/medicos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(medicoInvalido)))

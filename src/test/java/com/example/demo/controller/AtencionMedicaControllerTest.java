@@ -57,11 +57,10 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getTodasLasAtenciones_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
-        // Given
+
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAllAtenciones()).thenReturn(atenciones);
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -76,10 +75,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionPorIdExistente_entoncesRetornarAtencionConEnlacesHATEOAS() throws Exception {
-        // Given
+
         when(atencionMedicaService.getAtencionById(1L)).thenReturn(Optional.of(atencionMedica));
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -95,10 +93,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.getAtencionById(999L)).thenReturn(Optional.empty());
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/999")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -111,10 +108,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void createAtencionValida_entoncesRetornarAtencionCreadaConEnlacesHATEOAS() throws Exception {
-        // Given
+
         when(atencionMedicaService.createAtencion(any(AtencionMedica.class))).thenReturn(atencionMedica);
 
-        // When & Then
         mockMvc.perform(post("/atenciones-medicas")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(atencionMedica)))
@@ -131,7 +127,7 @@ public class AtencionMedicaControllerTest {
  
     @Test
     void updateAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() throws Exception {
-        // Given
+
         AtencionMedica atencionActualizada = new AtencionMedica();
         atencionActualizada.setId(1L);
         atencionActualizada.setPacienteId(1L); // Agregando campos requeridos
@@ -142,7 +138,6 @@ public class AtencionMedicaControllerTest {
 
         when(atencionMedicaService.updateAtencion(eq(1L), any(AtencionMedica.class))).thenReturn(atencionActualizada);
 
-        // When & Then
         mockMvc.perform(put("/atenciones-medicas/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(atencionActualizada)))
@@ -158,10 +153,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void updateAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.updateAtencion(eq(999L), any(AtencionMedica.class))).thenReturn(null);
 
-        // When & Then
         mockMvc.perform(put("/atenciones-medicas/999")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(atencionMedica)))
@@ -175,10 +169,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void deleteAtencionExistente_entoncesRetornarOkConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.deleteAtencion(1L)).thenReturn(true);
 
-        // When & Then
         mockMvc.perform(delete("/atenciones-medicas/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -192,10 +185,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void deleteAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.deleteAtencion(999L)).thenReturn(false);
 
-        // When & Then
         mockMvc.perform(delete("/atenciones-medicas/999")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -208,11 +200,10 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionesPorPacienteId_entoncesRetornarListaConEnlaces() throws Exception {
-        // Given
+
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByPacienteId(1L)).thenReturn(atenciones);
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/paciente/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -226,11 +217,10 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionesPorMedicoId_entoncesRetornarListaConEnlaces() throws Exception {
-        // Given
+
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByMedicoId(1L)).thenReturn(atenciones);
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/medico/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -244,11 +234,10 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionesPorEstadoValido_entoncesRetornarListaConEnlaces() throws Exception {
-        // Given
+
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByEstado("Realizada")).thenReturn(atenciones);
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/estado/Realizada")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -262,7 +251,6 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionesPorEstadoInvalido_entoncesRetornarBadRequestConEnlaces() throws Exception {
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/estado/Invalido")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
@@ -274,13 +262,12 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getEstadisticas_entoncesRetornarEstadisticasConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.getAllAtenciones()).thenReturn(Arrays.asList(atencionMedica));
         when(atencionMedicaService.countAtencionesByEstado("Realizada")).thenReturn(1L);
         when(atencionMedicaService.countAtencionesByEstado("Programada")).thenReturn(0L);
         when(atencionMedicaService.countAtencionesByEstado("Cancelada")).thenReturn(0L);
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas/estadisticas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -300,10 +287,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void cargarDatosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.createAtencion(any(AtencionMedica.class))).thenReturn(atencionMedica);
 
-        // When & Then
         mockMvc.perform(post("/atenciones-medicas/cargar-ejemplos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -319,10 +305,9 @@ public class AtencionMedicaControllerTest {
 
     @Test
     void getAtencionesVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
-        // Given
+
         when(atencionMedicaService.getAllAtenciones()).thenReturn(Collections.emptyList());
 
-        // When & Then
         mockMvc.perform(get("/atenciones-medicas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
