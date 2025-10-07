@@ -18,7 +18,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    public void cuandoActualizarAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() throws Exception {
+    public void updateAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() throws Exception {
         // Simulación de datos y lógica para la prueba
         mockMvc.perform(put("/atencion/1")
                 .contentType("application/json")
@@ -27,7 +27,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    public void cuandoCrearAtencionSinPacienteId_entoncesRetornarBadRequestConEnlaces() throws Exception {
+    public void createAtencionSinPacienteId_entoncesRetornarBadRequestConEnlaces() throws Exception {
         // Simulación de datos y lógica para la prueba
         mockMvc.perform(post("/atencion")
                 .contentType("application/json")

@@ -110,7 +110,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoCrearAtencionValida_entoncesRetornarAtencionCreadaConEnlacesHATEOAS() throws Exception {
+    void createAtencionValida_entoncesRetornarAtencionCreadaConEnlacesHATEOAS() throws Exception {
         // Given
         when(atencionMedicaService.createAtencion(any(AtencionMedica.class))).thenReturn(atencionMedica);
 
@@ -130,7 +130,7 @@ public class AtencionMedicaControllerTest {
 
  
     @Test
-    void cuandoActualizarAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() throws Exception {
+    void updateAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() throws Exception {
         // Given
         AtencionMedica atencionActualizada = new AtencionMedica();
         atencionActualizada.setId(1L);
@@ -157,7 +157,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoActualizarAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void updateAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.updateAtencion(eq(999L), any(AtencionMedica.class))).thenReturn(null);
 
@@ -174,7 +174,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoEliminarAtencionExistente_entoncesRetornarOkConEnlaces() throws Exception {
+    void deleteAtencionExistente_entoncesRetornarOkConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.deleteAtencion(1L)).thenReturn(true);
 
@@ -191,7 +191,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoEliminarAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void deleteAtencionNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.deleteAtencion(999L)).thenReturn(false);
 
@@ -299,7 +299,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoCargarDatosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
+    void cargarDatosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.createAtencion(any(AtencionMedica.class))).thenReturn(atencionMedica);
 

@@ -107,7 +107,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoCrearMedicoValido_entoncesRetornarMedicoCreadoConEnlacesHATEOAS() throws Exception {
+    void createMedicoValido_entoncesRetornarMedicoCreadoConEnlacesHATEOAS() throws Exception {
         // Given
         when(medicoService.createMedico(any(Medico.class))).thenReturn(medico);
 
@@ -126,7 +126,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoCrearMedicoConRutDuplicado_entoncesRetornarBadRequestConEnlaces() throws Exception {
+    void createMedicoConRutDuplicado_entoncesRetornarBadRequestConEnlaces() throws Exception {
         // Given
         when(medicoService.createMedico(any(Medico.class)))
             .thenThrow(new RuntimeException("Ya existe un médico con el RUT: 12345678-9"));
@@ -143,7 +143,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoActualizarMedicoExistente_entoncesRetornarMedicoActualizadoConEnlaces() throws Exception {
+    void updateMedicoExistente_entoncesRetornarMedicoActualizadoConEnlaces() throws Exception {
         // Given
         Medico medicoActualizado = new Medico();
         medicoActualizado.setId(1L);
@@ -168,7 +168,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoActualizarMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void updateMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(medicoService.updateMedico(eq(999L), any(Medico.class))).thenReturn(null);
 
@@ -185,7 +185,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoEliminarMedicoExistente_entoncesRetornarOkConEnlaces() throws Exception {
+    void deleteMedicoExistente_entoncesRetornarOkConEnlaces() throws Exception {
         // Given
         when(medicoService.deleteMedico(1L)).thenReturn(true);
 
@@ -201,7 +201,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoEliminarMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void deleteMedicoNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(medicoService.deleteMedico(999L)).thenReturn(false);
 
@@ -251,7 +251,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoCargarMedicosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
+    void cargarMedicosEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
         // Given
         when(medicoService.createMedico(any(Medico.class))).thenReturn(medico);
 
@@ -285,7 +285,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoCrearMedicoConDatosInvalidos_entoncesRetornarBadRequest() throws Exception {
+    void createMedicoConDatosInvalidos_entoncesRetornarBadRequest() throws Exception {
         // Given
         Medico medicoInvalido = new Medico();
         medicoInvalido.setRut(""); // RUT vacío - inválido

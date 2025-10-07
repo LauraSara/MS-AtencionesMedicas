@@ -73,7 +73,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoCrearAtencionValida_entoncesGuardarYRetornarAtencion() {
+    void createAtencionValida_entoncesGuardarYRetornarAtencion() {
         // Given
         when(atencionMedicaRepository.save(any(AtencionMedica.class))).thenReturn(atencionMedica);
 
@@ -87,7 +87,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoActualizarAtencionExistente_entoncesRetornarAtencionActualizada() {
+    void updateAtencionExistente_entoncesRetornarAtencionActualizada() {
         // Given
         AtencionMedica atencionActualizada = new AtencionMedica();
         atencionActualizada.setMotivoConsulta("Dolor actualizado");
@@ -106,7 +106,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoEliminarAtencionExistente_entoncesRetornarTrue() {
+    void deleteAtencionExistente_entoncesRetornarTrue() {
         // Given
         when(atencionMedicaRepository.existsById(1L)).thenReturn(true);
         doNothing().when(atencionMedicaRepository).deleteById(1L);
@@ -121,7 +121,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoEliminarAtencionNoExistente_entoncesRetornarFalse() {
+    void deleteAtencionNoExistente_entoncesRetornarFalse() {
         // Given
         when(atencionMedicaRepository.existsById(999L)).thenReturn(false);
 

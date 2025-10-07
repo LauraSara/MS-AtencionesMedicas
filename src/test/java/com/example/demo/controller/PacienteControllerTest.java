@@ -105,7 +105,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoCrearPacienteValido_entoncesRetornarPacienteCreadoConEnlacesHATEOAS() throws Exception {
+    void createPacienteValido_entoncesRetornarPacienteCreadoConEnlacesHATEOAS() throws Exception {
         // Given
         when(pacienteService.createPaciente(any(Paciente.class))).thenReturn(paciente);
 
@@ -124,7 +124,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoCrearPacienteConRutDuplicado_entoncesRetornarBadRequestConEnlaces() throws Exception {
+    void createPacienteConRutDuplicado_entoncesRetornarBadRequestConEnlaces() throws Exception {
         // Given
         when(pacienteService.createPaciente(any(Paciente.class)))
             .thenThrow(new RuntimeException("Ya existe un paciente con el RUT: 12345678-9"));
@@ -141,7 +141,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoActualizarPacienteExistente_entoncesRetornarPacienteActualizadoConEnlaces() throws Exception {
+    void updatePacienteExistente_entoncesRetornarPacienteActualizadoConEnlaces() throws Exception {
         // Given
         Paciente pacienteActualizado = new Paciente();
         pacienteActualizado.setId(1L);
@@ -165,7 +165,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoActualizarPacienteNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void updatePacienteNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(pacienteService.updatePaciente(eq(999L), any(Paciente.class))).thenReturn(null);
 
@@ -182,7 +182,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoEliminarPacienteExistente_entoncesRetornarOkConEnlaces() throws Exception {
+    void deletePacienteExistente_entoncesRetornarOkConEnlaces() throws Exception {
         // Given
         when(pacienteService.deletePaciente(1L)).thenReturn(true);
 
@@ -198,7 +198,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoEliminarPacienteNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void deletePacienteNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(pacienteService.deletePaciente(999L)).thenReturn(false);
 
@@ -248,7 +248,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoCargarPacientesEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
+    void cargarPacientesEjemplo_entoncesRetornarMensajeConEnlaces() throws Exception {
         // Given
         when(pacienteService.createPaciente(any(Paciente.class))).thenReturn(paciente);
 

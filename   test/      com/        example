@@ -1,14 +1,14 @@
 public class AtencionMedicaControllerTest {
     
     @Test
-    public void cuandoActualizarAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() {
+    public void updateAtencionExistente_entoncesRetornarAtencionActualizadaConEnlaces() {
         // Configurar datos de prueba
         // Llamar al método de actualización
         // Verificar que el estado de la respuesta sea 200
     }
 
     @Test
-    public void cuandoCrearAtencionSinPacienteId_entoncesRetornarBadRequestConEnlaces() {
+    public void createAtencionSinPacienteId_entoncesRetornarBadRequestConEnlaces() {
         // Configurar datos de prueba
         // Llamar al método de creación
         // Verificar que el estado de la respuesta sea 400
