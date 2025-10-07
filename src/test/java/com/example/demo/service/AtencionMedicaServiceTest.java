@@ -44,7 +44,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoObtenerTodasLasAtenciones_entoncesRetornarLista() {
+    void getTodasLasAtenciones_entoncesRetornarLista() {
         // Given
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaRepository.findAll()).thenReturn(atenciones);
@@ -59,7 +59,7 @@ public class AtencionMedicaServiceTest {
     }
 
     @Test
-    void cuandoObtenerAtencionPorIdExistente_entoncesRetornarAtencion() {
+    void getAtencionPorIdExistente_entoncesRetornarAtencion() {
         // Given
         when(atencionMedicaRepository.findById(1L)).thenReturn(Optional.of(atencionMedica));
 

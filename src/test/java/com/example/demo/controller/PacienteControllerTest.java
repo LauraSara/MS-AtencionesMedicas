@@ -51,7 +51,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerTodosLosPacientes_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
+    void getTodosLosPacientes_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
         // Given
         List<Paciente> pacientes = Arrays.asList(paciente);
         when(pacienteService.getAllPacientes()).thenReturn(pacientes);
@@ -70,7 +70,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerPacientePorIdExistente_entoncesRetornarPacienteConEnlacesHATEOAS() throws Exception {
+    void getPacientePorIdExistente_entoncesRetornarPacienteConEnlacesHATEOAS() throws Exception {
         // Given
         when(pacienteService.getPacienteById(1L)).thenReturn(Optional.of(paciente));
 
@@ -89,7 +89,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerPacientePorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void getPacientePorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(pacienteService.getPacienteById(999L)).thenReturn(Optional.empty());
 
@@ -214,7 +214,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerPacientePorRutExistente_entoncesRetornarPacienteConEnlaces() throws Exception {
+    void getPacientePorRutExistente_entoncesRetornarPacienteConEnlaces() throws Exception {
         // Given
         when(pacienteService.getPacienteByRut("12345678-9")).thenReturn(Optional.of(paciente));
 
@@ -232,7 +232,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerPacientePorRutNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void getPacientePorRutNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(pacienteService.getPacienteByRut("00000000-0")).thenReturn(Optional.empty());
 
@@ -266,7 +266,7 @@ public class PacienteControllerTest {
     }
 
     @Test
-    void cuandoObtenerPacientesVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
+    void getPacientesVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
         // Given
         when(pacienteService.getAllPacientes()).thenReturn(Collections.emptyList());
 

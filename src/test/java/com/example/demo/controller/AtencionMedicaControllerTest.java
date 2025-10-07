@@ -56,7 +56,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerTodasLasAtenciones_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
+    void getTodasLasAtenciones_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
         // Given
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAllAtenciones()).thenReturn(atenciones);
@@ -75,7 +75,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionPorIdExistente_entoncesRetornarAtencionConEnlacesHATEOAS() throws Exception {
+    void getAtencionPorIdExistente_entoncesRetornarAtencionConEnlacesHATEOAS() throws Exception {
         // Given
         when(atencionMedicaService.getAtencionById(1L)).thenReturn(Optional.of(atencionMedica));
 
@@ -94,7 +94,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void getAtencionPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.getAtencionById(999L)).thenReturn(Optional.empty());
 
@@ -207,7 +207,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionesPorPacienteId_entoncesRetornarListaConEnlaces() throws Exception {
+    void getAtencionesPorPacienteId_entoncesRetornarListaConEnlaces() throws Exception {
         // Given
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByPacienteId(1L)).thenReturn(atenciones);
@@ -225,7 +225,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionesPorMedicoId_entoncesRetornarListaConEnlaces() throws Exception {
+    void getAtencionesPorMedicoId_entoncesRetornarListaConEnlaces() throws Exception {
         // Given
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByMedicoId(1L)).thenReturn(atenciones);
@@ -243,7 +243,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionesPorEstadoValido_entoncesRetornarListaConEnlaces() throws Exception {
+    void getAtencionesPorEstadoValido_entoncesRetornarListaConEnlaces() throws Exception {
         // Given
         List<AtencionMedica> atenciones = Arrays.asList(atencionMedica);
         when(atencionMedicaService.getAtencionesByEstado("Realizada")).thenReturn(atenciones);
@@ -261,7 +261,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionesPorEstadoInvalido_entoncesRetornarBadRequestConEnlaces() throws Exception {
+    void getAtencionesPorEstadoInvalido_entoncesRetornarBadRequestConEnlaces() throws Exception {
         // When & Then
         mockMvc.perform(get("/atenciones-medicas/estado/Invalido")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -273,7 +273,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerEstadisticas_entoncesRetornarEstadisticasConEnlaces() throws Exception {
+    void getEstadisticas_entoncesRetornarEstadisticasConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.getAllAtenciones()).thenReturn(Arrays.asList(atencionMedica));
         when(atencionMedicaService.countAtencionesByEstado("Realizada")).thenReturn(1L);
@@ -318,7 +318,7 @@ public class AtencionMedicaControllerTest {
     }
 
     @Test
-    void cuandoObtenerAtencionesVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
+    void getAtencionesVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
         // Given
         when(atencionMedicaService.getAllAtenciones()).thenReturn(Collections.emptyList());
 

@@ -52,7 +52,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerTodosLosMedicos_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
+    void getTodosLosMedicos_entoncesRetornarListaConEnlacesHATEOAS() throws Exception {
         // Given
         List<Medico> medicos = Arrays.asList(medico);
         when(medicoService.getAllMedicos()).thenReturn(medicos);
@@ -71,7 +71,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerMedicoPorIdExistente_entoncesRetornarMedicoConEnlacesHATEOAS() throws Exception {
+    void getMedicoPorIdExistente_entoncesRetornarMedicoConEnlacesHATEOAS() throws Exception {
         // Given
         when(medicoService.getMedicoById(1L)).thenReturn(Optional.of(medico));
 
@@ -91,7 +91,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerMedicoPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void getMedicoPorIdNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(medicoService.getMedicoById(999L)).thenReturn(Optional.empty());
 
@@ -217,7 +217,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerMedicoPorRutExistente_entoncesRetornarMedicoConEnlaces() throws Exception {
+    void getMedicoPorRutExistente_entoncesRetornarMedicoConEnlaces() throws Exception {
         // Given
         when(medicoService.getMedicoByRut("12345678-9")).thenReturn(Optional.of(medico));
 
@@ -235,7 +235,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerMedicoPorRutNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
+    void getMedicoPorRutNoExistente_entoncesRetornarNotFoundConEnlaces() throws Exception {
         // Given
         when(medicoService.getMedicoByRut("00000000-0")).thenReturn(Optional.empty());
 
@@ -269,7 +269,7 @@ public class MedicoControllerTest {
     }
 
     @Test
-    void cuandoObtenerMedicosVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
+    void getMedicosVacia_entoncesRetornarListaVaciaConEnlaces() throws Exception {
         // Given
         when(medicoService.getAllMedicos()).thenReturn(Collections.emptyList());
 
